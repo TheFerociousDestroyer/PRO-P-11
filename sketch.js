@@ -1,9 +1,10 @@
 var path,boy, leftBoundary,rightBoundary;
-var pathImg,boyImg;
+var pathImg,boyImg,coinImg;
 var i;
 
 function preload(){
   pathImg = loadImage("path.png");
+  coinImg = loadImage("coin.png");
   boyImg = loadAnimation("Runner-1.png","Runner-2.png");
 }
 
@@ -21,7 +22,10 @@ path.scale=1.2;
 boy = createSprite(180,340,30,30);
 boy.scale=0.08;
 boy.addAnimation("JakeRunning",boyImg);
-  
+
+coin = createSprite(200,150,20,20);;
+coin.scale = 0.5;
+coin.addImage(coinImg);
 
 leftBoundary=createSprite(0,0,100,800);
 
@@ -40,12 +44,16 @@ function draw() {
   path.velocityY = 4;
   
   boy.x = World.mouseX;
-  
+  boy.y = World.mouseY;
   edges= createEdgeSprites();
   boy.collide(edges[3]);
   boy.collide(leftBoundary);
   boy.collide(rightBoundary);
   
+  //if(boy.collide(coinImg))
+  {
+    coinImg.visible = false;
+  }
   //code to reset the background
 
   if(path.y > 400 ){
